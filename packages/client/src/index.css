@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.home_bg {
+  background-image: url("./modules/images/home_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5%;
+  height: 100vh;
+}
+.btn_nav {
+  margin-right: 2%;
+}
