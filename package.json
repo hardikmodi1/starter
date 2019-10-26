@@ -16,6 +16,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "tslint './packages/**/*.{ts,tsx}' --fix",
+      "prettier ./packages/**/*.{ts,tsx} --write",
       "git add"
     ]
   },
