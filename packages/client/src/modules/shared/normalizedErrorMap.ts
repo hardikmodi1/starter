@@ -1,3 +1,3 @@
 export interface NormalizedErrorMap {
-	[key: string]: string;
+  [key: string]: string
 }

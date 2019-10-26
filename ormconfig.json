@@ -5,7 +5,7 @@
 	"port": 5432,
 	"username": "postgres",
 	"password": "postgres",
-	"database": "hackathon",
+	"database": "diary",
 	"synchronize": true,
 	"logging": true,
 	"entities": ["src/entity/*.*"]

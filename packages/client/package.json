@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/react-common": "^3.1.3",
+    "@apollo/react-components": "^3.1.3",
+    "@apollo/react-hoc": "^3.1.3",
     "antd": "^3.21.4",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
@@ -23,7 +26,11 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml",
+    "lint": "tslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "tslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './src/**/*.{ts,tsx}'",
+    "prettier:fix": "prettier './src/**/*.{ts,tsx}' --write"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.6.1",
