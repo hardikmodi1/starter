@@ -1,6 +1,29 @@
 {
-	"private": true,
-	"workspaces": [
-		"packages/*"
-	]
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "lerna run start",
+    "lint:fix": "lerna run lint:fix",
+    "prettier:fix": "lerna run prettier:fix --stream"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "lerna run lint:fix",
+      "lerna run prettier:fix",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^3.0.9",
+    "lerna": "^3.18.3",
+    "lint-staged": "^9.4.2"
+  },
+  "name": "diary"
 }

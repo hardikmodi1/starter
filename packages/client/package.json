@@ -26,7 +26,11 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml",
+    "lint": "tslint './src/**/*.{ts,tsx}'",
+    "lint:fix": "tslint './src/**/*.{ts,tsx}' --fix",
+    "prettier": "prettier './src/**/*.{ts,tsx}'",
+    "prettier:fix": "prettier './src/**/*.{ts,tsx}' --write"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.6.1",
