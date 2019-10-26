@@ -8,7 +8,7 @@ dist
 
 # dependencies
 /node_modules
-/packages/slack_client/node_modules
+/packages/client/node_modules
 /packages/typegraphql_boilerplate/node_modules
 
 # testing
