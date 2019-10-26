@@ -14,9 +14,8 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "lerna run lint:fix",
-      "lerna run prettier:fix",
+    "*.{ts,tsx}": [
+      "tslint './packages/**/*.{ts,tsx}' --fix",
       "git add"
     ]
   },
