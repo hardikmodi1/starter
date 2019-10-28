@@ -1,0 +1,7 @@
+*
+
+!./package.json
+!./packages/typegraphql_boilerplate/package.json
+!./packages/typegraphql_boilerplate/dist
+!./ormconfig.json
+!./wait-for-it.sh
