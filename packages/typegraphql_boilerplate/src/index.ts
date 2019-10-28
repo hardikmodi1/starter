@@ -5,15 +5,14 @@ import * as Express from 'express'
 import * as session from 'express-session'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
-import { createConnection } from 'typeorm'
+import { createTypeOrmConn } from './modules/utils/createTypeOrmConn'
 import { redis } from './redis'
 
 const RedisStore = connectRedis(session as any)
-
 const main = async () => {
-  await createConnection()
+  await createTypeOrmConn()
   const schema = await buildSchema({
-    resolvers: [__dirname + '/modules/**/*.ts'],
+    resolvers: [__dirname + '/modules/**/*.?s'],
     authChecker: ({ context: { req } }) => {
       return !!req.session.userId
     },
@@ -49,8 +48,9 @@ const main = async () => {
   )
 
   apolloServer.applyMiddleware({ app, cors: false })
-  app.listen(4000, () => {
-    console.log('Server started on http://localhost:4000/graphql')
+  console.log('reached here...')
+  app.listen(4001, () => {
+    console.log('Server started on http://localhost:4001/graphql')
   })
 }
 
