@@ -5,8 +5,8 @@
     "port": 5432,
     "username": "postgres",
     "password": "postgres",
-    "database": "diary",
-    "url": "postgres://postgres:postgres@db:5432/diary?ssl=true",
+    "database": "test",
+    "url": "postgres://postgres:postgres@db:5432/test?ssl=true",
     "synchronize": true,
     "logging": true
   },
@@ -17,7 +17,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "postgres",
-    "database": "diary",
+    "database": "test",
     "synchronize": true,
     "logging": true,
     "entities": ["src/entity/*.*"]
@@ -39,7 +39,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "postgres",
-    "database": "diary",
+    "database": "test",
     "synchronize": true,
     "logging": true,
     "entities": ["src/entity/*.*"]
