@@ -10,7 +10,6 @@ import { redis } from './redis'
 
 const RedisStore = connectRedis(session as any)
 const main = async () => {
-  await createTypeOrmConn()
   const schema = await buildSchema({
     resolvers: [__dirname + '/modules/**/*.?s'],
     authChecker: ({ context: { req } }) => {
@@ -21,6 +20,18 @@ const main = async () => {
     schema,
     context: ({ req, res }: any) => ({ req, res }),
   })
+  let retries = 25
+  while (retries) {
+    try {
+      await createTypeOrmConn()
+      break
+    } catch (err) {
+      console.log(err)
+      retries -= 1
+      console.log(`retries left: ${retries}`)
+      await new Promise(res => setTimeout(res, 5000))
+    }
+  }
   const app = Express()
 
   app.use(
@@ -49,8 +60,8 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app, cors: false })
   console.log('reached here...')
-  app.listen(4001, () => {
-    console.log('Server started on http://localhost:4001/graphql')
+  app.listen(4000, () => {
+    console.log('Server started on http://localhost:4000/graphql')
   })
 }
 

@@ -3,11 +3,11 @@
     "name": "production",
     "type": "postgres",
     "port": 5432,
+    "host": "db",
     "username": "postgres",
     "password": "postgres",
     "database": "diary",
-    "url": "postgres://postgres:postgres@db:5432/diary?ssl=true",
-    "synchronize": true,
+    "synchronize": false,
     "logging": true
   },
   {
@@ -20,7 +20,7 @@
     "database": "diary",
     "synchronize": true,
     "logging": true,
-    "entities": ["src/entity/*.*"]
+    "entities": ["dist/entity/*.*"]
   },
   {
     "name": "default",
@@ -32,6 +32,6 @@
     "database": "diary",
     "synchronize": true,
     "logging": true,
-    "entities": ["src/entity/*.*"]
+    "entities": ["dist/entity/*.*"]
   }
 ]
