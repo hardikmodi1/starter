@@ -23,6 +23,16 @@
     "entities": ["src/entity/*.*"]
   },
   {
+    "name": "test",
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "postgres",
+    "database": "test",
+    "entities": ["src/entity/*.*"]
+  },
+  {
     "name": "default",
     "type": "postgres",
     "host": "localhost",
