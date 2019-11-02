@@ -18,7 +18,6 @@
     "*.{ts,tsx}": [
       "tslint './packages/*/src/**/*.{ts,tsx}' --fix",
       "prettier ./packages/*/src/**/*.{ts,tsx} --write",
-      "yarn test",
       "git add"
     ]
   },
