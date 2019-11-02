@@ -15,8 +15,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "tslint './packages/**/*.{ts,tsx}' --fix",
-      "prettier ./packages/**/*.{ts,tsx} --write",
+      "tslint './packages/*/src/**/*.{ts,tsx}' --fix",
+      "prettier ./packages/*src/**/*.{ts,tsx} --write",
       "git add"
     ]
   },
