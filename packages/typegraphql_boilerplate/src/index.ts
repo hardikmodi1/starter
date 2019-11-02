@@ -4,19 +4,14 @@ import * as cors from 'cors'
 import * as Express from 'express'
 import * as session from 'express-session'
 import 'reflect-metadata'
-import { buildSchema } from 'type-graphql'
 import { createTypeOrmConn } from './modules/utils/createTypeOrmConn'
 import { redis } from './redis'
+import { createSchema } from './utils/createSchema'
 
 const RedisStore = connectRedis(session as any)
 const main = async () => {
   await createTypeOrmConn()
-  const schema = await buildSchema({
-    resolvers: [__dirname + '/modules/**/*.?s'],
-    authChecker: ({ context: { req } }) => {
-      return !!req.session.userId
-    },
-  })
+  const schema = await createSchema()
   const apolloServer = new ApolloServer({
     schema,
     context: ({ req, res }: any) => ({ req, res }),

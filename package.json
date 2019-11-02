@@ -6,7 +6,8 @@
   "scripts": {
     "start": "lerna run start",
     "lint:fix": "lerna run lint:fix",
-    "prettier:fix": "lerna run prettier:fix --stream"
+    "prettier:fix": "lerna run prettier:fix --stream",
+    "test": "lerna run test --scope typegraphql_boilerplate --stream"
   },
   "husky": {
     "hooks": {
@@ -15,8 +16,9 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "tslint './packages/**/*.{ts,tsx}' --fix",
-      "prettier ./packages/**/*.{ts,tsx} --write",
+      "tslint './packages/*/src/**/*.{ts,tsx}' --fix",
+      "prettier ./packages/*/src/**/*.{ts,tsx} --write",
+      "yarn test",
       "git add"
     ]
   },

@@ -2,6 +2,7 @@ import * as bcrypt from 'bcryptjs'
 import { Arg, Ctx, Mutation, Resolver } from 'type-graphql'
 import { User } from '../../entity/User'
 import { Context } from '../../types/Context'
+import { passwordIncorrect, userDoesNotExist } from '../constants/errorMessages'
 import ComposeErrorMessage from '../shared/ComposeErrorMessage'
 import Error from '../shared/ErrorType'
 
@@ -17,11 +18,11 @@ export class LoginResolver {
       where: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
     })
     if (!user) {
-      return [ComposeErrorMessage('usernameOrEmail', 'User does not exist')]
+      return [ComposeErrorMessage('usernameOrEmail', userDoesNotExist)]
     }
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) {
-      return [ComposeErrorMessage('password', 'Password is incorrect')]
+      return [ComposeErrorMessage('password', passwordIncorrect)]
     }
     if (!user.confirmed) {
       return [ComposeErrorMessage('password', 'Please confirm your account')]

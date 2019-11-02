@@ -1,6 +1,7 @@
 import * as bcrypt from 'bcryptjs'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { User } from '../../entity/User'
+import { emailExist, usernameExist } from '../constants/errorMessages'
 import ComposeErrorMessage from '../shared/ComposeErrorMessage'
 import Error from '../shared/ErrorType'
 import { formatYupError } from '../utils/formatYupError'
@@ -35,10 +36,10 @@ export class RegisterResolver {
     })
     if (userAlreadyExist) {
       if (userAlreadyExist.username === username) {
-        return [ComposeErrorMessage('username', 'Username already exist')]
+        return [ComposeErrorMessage('username', usernameExist)]
       }
       if (userAlreadyExist.email === email) {
-        return [ComposeErrorMessage('email', 'Email already exist')]
+        return [ComposeErrorMessage('email', emailExist)]
       }
     }
 
