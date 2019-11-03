@@ -5,6 +5,7 @@ import * as Express from 'express'
 import * as session from 'express-session'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
+import { User } from './entity/User'
 import { createTypeOrmConn } from './modules/utils/createTypeOrmConn'
 import { redis } from './redis'
 
@@ -60,9 +61,10 @@ const main = async () => {
 
   apolloServer.applyMiddleware({ app, cors: false })
   console.log('reached here...')
-  app.listen(4000, () => {
-    console.log('Server started on http://localhost:4000/graphql')
-  })
+  console.log(await User.find({ where: { email: 'hmodi2457@gmail.com' } }))
+  console.log(app)
+  await app.listen(4000)
+  console.log('listening on http://localhost:4000/graphql')
 }
 
 main()

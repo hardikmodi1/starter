@@ -1,10 +1,12 @@
-version: '3'
+version: '3.3'
 services:
   redis:
+    restart: always
     image: redis
 
   db:
-    image: postgres
+    restart: always
+    image: postgres:11.5
     ports:
       - '5432:5432'
     environment:
@@ -13,6 +15,7 @@ services:
       POSTGRES_DB: diary
 
   server:
+    restart: always
     image: hardik/diary:1.0.0
     ports:
       - '4000:4000'
