@@ -1,4 +1,5 @@
 import { createConnection, getConnectionOptions } from 'typeorm'
+import { User } from '../../entity/User'
 
 export const createTypeOrmConn = async () => {
   const connectionOptions = await getConnectionOptions(process.env.NODE_ENV)
@@ -8,13 +9,13 @@ export const createTypeOrmConn = async () => {
         name: 'default',
         type: 'postgres',
         port: 5432,
-        host: process.env.DB_HOST,
+        host: process.env.DB_HOST || 'localhost',
         username: 'postgres',
         password: 'postgres',
         database: 'diary',
-        synchronize: false,
+        synchronize: true,
         logging: true,
-        entities: ['../../entity/*.ts'],
+        entities: [User],
       } as any)
     : createConnection({ ...connectionOptions, name: 'default' })
 }
