@@ -4,18 +4,37 @@ import * as cors from 'cors'
 import * as Express from 'express'
 import * as session from 'express-session'
 import 'reflect-metadata'
+import { buildSchema } from 'type-graphql'
+import { User } from './entity/User'
 import { createTypeOrmConn } from './modules/utils/createTypeOrmConn'
 import { redis } from './redis'
-import { createSchema } from './utils/createSchema'
 
 const RedisStore = connectRedis(session as any)
 const main = async () => {
-  await createTypeOrmConn()
-  const schema = await createSchema()
+  const schema = await buildSchema({
+    resolvers: [__dirname + '/modules/**/*.?s'],
+    authChecker: ({ context: { req } }) => {
+      return !!req.session.userId
+    },
+  })
   const apolloServer = new ApolloServer({
     schema,
     context: ({ req, res }: any) => ({ req, res }),
+    introspection: true,
+    playground: true,
   })
+  let retries = 25
+  while (retries) {
+    try {
+      await createTypeOrmConn()
+      break
+    } catch (err) {
+      console.log(err)
+      retries -= 1
+      console.log(`retries left: ${retries}`)
+      await new Promise(res => setTimeout(res, 5000))
+    }
+  }
   const app = Express()
 
   app.use(
@@ -24,6 +43,8 @@ const main = async () => {
       credentials: true,
     })
   )
+  await redis.set('foo', 'bar')
+  console.log(await redis.get('foo'), 'redis is here')
 
   app.use(
     session({
@@ -43,10 +64,9 @@ const main = async () => {
   )
 
   apolloServer.applyMiddleware({ app, cors: false })
-  console.log('reached here...')
-  app.listen(4000, () => {
-    console.log('Server started on http://localhost:4000/graphql')
-  })
+  console.log(await User.find({ where: { email: 'hmodi2457@gmail.com' } }))
+  await app.listen(4000)
+  console.log('listening on http://localhost:4000/graphql')
 }
 
 main()
