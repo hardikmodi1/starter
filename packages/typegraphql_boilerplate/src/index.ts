@@ -20,6 +20,8 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema,
     context: ({ req, res }: any) => ({ req, res }),
+    introspection: true,
+    playground: true,
   })
   let retries = 25
   while (retries) {
@@ -41,6 +43,8 @@ const main = async () => {
       credentials: true,
     })
   )
+  await redis.set('foo', 'bar')
+  console.log(await redis.get('foo'), 'redis is here')
 
   app.use(
     session({
@@ -60,9 +64,7 @@ const main = async () => {
   )
 
   apolloServer.applyMiddleware({ app, cors: false })
-  console.log('reached here...')
   console.log(await User.find({ where: { email: 'hmodi2457@gmail.com' } }))
-  console.log(app)
   await app.listen(4000)
   console.log('listening on http://localhost:4000/graphql')
 }
