@@ -3,11 +3,11 @@
     "name": "production",
     "type": "postgres",
     "port": 5432,
+    "host": "db",
     "username": "postgres",
     "password": "postgres",
-    "database": "test",
-    "url": "postgres://postgres:postgres@db:5432/test?ssl=true",
-    "synchronize": true,
+    "database": "diary",
+    "synchronize": false,
     "logging": true
   },
   {
