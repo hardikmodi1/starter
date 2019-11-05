@@ -1,7 +1,11 @@
 version: '3.3'
 services:
   redis:
+    expose:
+      - '6379'
     restart: always
+    ports:
+      - '6379:6379'
     image: redis
 
   db:
@@ -17,8 +21,10 @@ services:
   server:
     restart: always
     image: hardik/diary:1.0.0
+    expose:
+      - '4000'
     ports:
-      - '4000:4000'
+      - 4000:4000
     environment:
       REDIS_HOST: redis
       DB_HOST: db

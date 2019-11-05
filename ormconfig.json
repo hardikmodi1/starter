@@ -20,7 +20,7 @@
     "database": "diary",
     "synchronize": true,
     "logging": true,
-    "entities": ["dist/entity/*.*"]
+    "entities": ["src/entity/*.*"]
   },
   {
     "name": "default",
@@ -32,6 +32,6 @@
     "database": "diary",
     "synchronize": true,
     "logging": true,
-    "entities": ["dist/entity/*.*"]
+    "entities": ["src/entity/*.*"]
   }
 ]
