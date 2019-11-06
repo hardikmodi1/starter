@@ -12,7 +12,7 @@ export const createTypeOrmConn = async () => {
         host: process.env.DB_HOST || 'localhost',
         username: 'postgres',
         password: 'postgres',
-        database: 'diary',
+        database: 'type',
         synchronize: true,
         logging: true,
         entities: [User],
