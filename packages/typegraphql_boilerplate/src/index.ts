@@ -8,6 +8,8 @@ import { buildSchema } from 'type-graphql'
 import { User } from './entity/User'
 import { createTypeOrmConn } from './modules/utils/createTypeOrmConn'
 import { redis } from './redis'
+// tslint:disable-next-line
+require('dotenv').config()
 
 const RedisStore = connectRedis(session as any)
 const main = async () => {
@@ -52,7 +54,7 @@ const main = async () => {
         client: redis as any,
       }),
       name: 'qid',
-      secret: 'aslkdfjoiq12312',
+      secret: process.env.SECRET as string,
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -63,10 +65,12 @@ const main = async () => {
     })
   )
 
+  const port = process.env.PORT || 4000
+
   apolloServer.applyMiddleware({ app, cors: false })
   console.log(await User.find({ where: { email: 'hmodi2457@gmail.com' } }))
-  await app.listen(4000)
-  console.log('listening on http://localhost:4000/graphql')
+  await app.listen(port)
+  console.log(`listening on http://localhost:${port}/graphql`)
 }
 
 main()

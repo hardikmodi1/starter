@@ -6,6 +6,7 @@ COPY ./package.json .
 COPY ./wait-for-it.sh .
 COPY ./ormconfig.json .
 COPY ./packages/typegraphql_boilerplate/package.json ./packages/typegraphql_boilerplate/
+COPY ./packages/typegraphql_boilerplate/.env ./packages/typegraphql_boilerplate/
 
 RUN npm i -g yarn
 RUN yarn install --production

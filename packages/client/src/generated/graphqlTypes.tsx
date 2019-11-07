@@ -19,59 +19,20 @@ export type ChangePasswordInput = {
   token: Scalars['String']
 }
 
-export type Channel = {
-  __typename?: 'Channel'
-  id: Scalars['ID']
-  name: Scalars['String']
-  public: Scalars['Boolean']
-}
-
-export type CreateChannelInput = {
-  name: Scalars['String']
-  isPublic: Scalars['Boolean']
-  teamId: Scalars['Float']
-}
-
-export type CreateMessageInput = {
-  text: Scalars['String']
-  channelId: Scalars['Float']
-}
-
 export type Error = {
   __typename?: 'Error'
   path?: Maybe<Scalars['String']>
   message?: Maybe<Scalars['String']>
 }
 
-export type Message = {
-  __typename?: 'Message'
-  id: Scalars['ID']
-  text: Scalars['String']
-}
-
 export type Mutation = {
   __typename?: 'Mutation'
-  createChannel: Error
-  createMessage: Scalars['Boolean']
-  createTeam?: Maybe<Error>
   changePassword?: Maybe<User>
   confirmUser: Scalars['Boolean']
   forgotPassword: Scalars['Boolean']
   login?: Maybe<Array<Error>>
   logout: Scalars['Boolean']
   register?: Maybe<Array<Error>>
-}
-
-export type MutationCreateChannelArgs = {
-  data: CreateChannelInput
-}
-
-export type MutationCreateMessageArgs = {
-  data: CreateMessageInput
-}
-
-export type MutationCreateTeamArgs = {
-  name: Scalars['String']
 }
 
 export type MutationChangePasswordArgs = {
@@ -111,26 +72,12 @@ export type RegisterInput = {
   username: Scalars['String']
 }
 
-export type Team = {
-  __typename?: 'Team'
-  id: Scalars['ID']
-  name: Scalars['String']
-}
-
 export type User = {
   __typename?: 'User'
   id: Scalars['ID']
-  email: Scalars['String']
   username: Scalars['String']
+  email: Scalars['String']
 }
-export type CreateTeamMutationMutationVariables = {
-  name: Scalars['String']
-}
-
-export type CreateTeamMutationMutation = { __typename?: 'Mutation' } & {
-  createTeam: Maybe<{ __typename?: 'Error' } & Pick<Error, 'path' | 'message'>>
-}
-
 export type LoginMutationMutationVariables = {
   usernameOrEmail: Scalars['String']
   password: Scalars['String']
@@ -154,70 +101,12 @@ export type RegisterMutationMutation = { __typename?: 'Mutation' } & {
   >
 }
 
-export const CreateTeamMutationDocument = gql`
-  mutation CreateTeamMutation($name: String!) {
-    createTeam(name: $name) {
-      path
-      message
-    }
-  }
-`
-export type CreateTeamMutationMutationFn = ApolloReactCommon.MutationFunction<
-  CreateTeamMutationMutation,
-  CreateTeamMutationMutationVariables
->
-export type CreateTeamMutationComponentProps = Omit<
-  ApolloReactComponents.MutationComponentOptions<
-    CreateTeamMutationMutation,
-    CreateTeamMutationMutationVariables
-  >,
-  'mutation'
->
+export type MeQueryQueryVariables = {}
 
-export const CreateTeamMutationComponent = (
-  props: CreateTeamMutationComponentProps
-) => (
-  <ApolloReactComponents.Mutation<
-    CreateTeamMutationMutation,
-    CreateTeamMutationMutationVariables
-  >
-    mutation={CreateTeamMutationDocument}
-    {...props}
-  />
-)
-
-export type CreateTeamMutationProps<
-  TChildProps = {}
-> = ApolloReactHoc.MutateProps<
-  CreateTeamMutationMutation,
-  CreateTeamMutationMutationVariables
-> &
-  TChildProps
-export function withCreateTeamMutation<TProps, TChildProps = {}>(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    CreateTeamMutationMutation,
-    CreateTeamMutationMutationVariables,
-    CreateTeamMutationProps<TChildProps>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    CreateTeamMutationMutation,
-    CreateTeamMutationMutationVariables,
-    CreateTeamMutationProps<TChildProps>
-  >(CreateTeamMutationDocument, {
-    alias: 'withCreateTeamMutation',
-    ...operationOptions,
-  })
+export type MeQueryQuery = { __typename?: 'Query' } & {
+  me: Maybe<{ __typename?: 'User' } & Pick<User, 'id' | 'email' | 'username'>>
 }
-export type CreateTeamMutationMutationResult = ApolloReactCommon.MutationResult<
-  CreateTeamMutationMutation
->
-export type CreateTeamMutationMutationOptions = ApolloReactCommon.BaseMutationOptions<
-  CreateTeamMutationMutation,
-  CreateTeamMutationMutationVariables
->
+
 export const LoginMutationDocument = gql`
   mutation LoginMutation($usernameOrEmail: String!, $password: String!) {
     login(usernameOrEmail: $usernameOrEmail, password: $password) {
@@ -347,4 +236,55 @@ export type RegisterMutationMutationResult = ApolloReactCommon.MutationResult<
 export type RegisterMutationMutationOptions = ApolloReactCommon.BaseMutationOptions<
   RegisterMutationMutation,
   RegisterMutationMutationVariables
+>
+export const MeQueryDocument = gql`
+  query MeQuery {
+    me {
+      id
+      email
+      username
+    }
+  }
+`
+export type MeQueryComponentProps = Omit<
+  ApolloReactComponents.QueryComponentOptions<
+    MeQueryQuery,
+    MeQueryQueryVariables
+  >,
+  'query'
+>
+
+export const MeQueryComponent = (props: MeQueryComponentProps) => (
+  <ApolloReactComponents.Query<MeQueryQuery, MeQueryQueryVariables>
+    query={MeQueryDocument}
+    {...props}
+  />
+)
+
+export type MeQueryProps<TChildProps = {}> = ApolloReactHoc.DataProps<
+  MeQueryQuery,
+  MeQueryQueryVariables
+> &
+  TChildProps
+export function withMeQuery<TProps, TChildProps = {}>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    MeQueryQuery,
+    MeQueryQueryVariables,
+    MeQueryProps<TChildProps>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    MeQueryQuery,
+    MeQueryQueryVariables,
+    MeQueryProps<TChildProps>
+  >(MeQueryDocument, {
+    alias: 'withMeQuery',
+    ...operationOptions,
+  })
+}
+export type MeQueryQueryResult = ApolloReactCommon.QueryResult<
+  MeQueryQuery,
+  MeQueryQueryVariables
 >
