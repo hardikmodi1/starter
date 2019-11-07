@@ -1,8 +1,10 @@
 import { Button, Form as AntForm, Icon } from 'antd'
 import { Field, Form, FormikProps, withFormik } from 'formik'
 import * as React from 'react'
+import { useQuery } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { LoginMutationMutationVariables } from '../../../generated/graphqlTypes'
+import { ME_QUERY } from '../../graphql/user/query/meQuery'
 import { InputField } from '../../shared/InputField'
 import { NormalizedErrorMap } from '../../shared/normalizedErrorMap'
 
@@ -22,6 +24,8 @@ interface Props {
 }
 
 const C: React.FC<FormikProps<FormValues> & Props> = props => {
+  const { data } = useQuery(ME_QUERY)
+  console.log(data)
   return (
     <div style={{ width: 400, margin: 'auto' }}>
       <h1>Login</h1>

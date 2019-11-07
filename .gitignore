@@ -4,12 +4,15 @@
 tmp/
 temp/
 dist
+build
 .next
 
 # dependencies
 /node_modules
 /packages/client/node_modules
 /packages/typegraphql_boilerplate/node_modules
+/packages/typegraphql_boilerplate/.env
+/packages/client/.env
 
 # testing
 /coverage
@@ -28,3 +31,5 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Local Netlify folder
+.netlify

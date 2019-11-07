@@ -6,7 +6,7 @@
     "host": "db",
     "username": "postgres",
     "password": "postgres",
-    "database": "type",
+    "database": "test",
     "synchronize": false,
     "logging": true
   },
