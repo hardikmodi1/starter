@@ -14,7 +14,7 @@
     "test": "set NODE_ENV=test && yarn db:setup && jest --watch"
   },
   "dependencies": {
-    "apollo-server-express": "^2.8.1",
+    "apollo-server-express": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.9.1",
     "connect-redis": "^3.4.2",
